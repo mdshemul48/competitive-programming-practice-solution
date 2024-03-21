@@ -8,7 +8,7 @@ vector<long long> printFirstNegativeInteger(long long int arr[],
 
     vector<long long> ans;
 
-    queue<long long> pik;`
+    queue<long long> pik;
     for (int i = 0; i < k; i++)
     {
 
