@@ -12,7 +12,7 @@ void dbg_out(Head H, Tail... T)
 #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
 
 #define endl '\n'
-#define int long long
+#define ll long long
 #define pub push_back
 #define pob pop_back
 #define all(X) (X).begin(), (X).end()
@@ -29,34 +29,37 @@ void dbg_out(Head H, Tail... T)
 void exc()
 {
     int t, n;
-    int l, r, x;
-    cin >> n >> l >> r >> x;
-    arrin(int, arr, n);
-
-    sort(arr, arr + n);
-
-    int ans = 0;
-
-    for (int i = 0; i < pow(2, n); i++)
+    cin >> t;
+    while (t--)
     {
-        int sum = 0;
-        vector<int> sbs;
-        for (int j = 0; j < n; j++)
-        {
-            if (i & (1 << j))
-            {
-                sbs.push_back(arr[j]);
-                sum += arr[j];
-            }
+        cin >> n;
+        arrin(int, arr, n);
+
+        if (n<=2){
+            yes;
         }
+        else {
+            vector<int> arr2; 
+            for (int i =0;i<n; i++){
+                if (arr[i] != arr[i+1] || i+1 == n) arr2.push_back(arr[i]);
+            }
 
-        if (sbs.size() >= 2 && sum <= r && l <= sum && sbs[sbs.size() - 1] - sbs[0] >= x)
-        {
+            if (arr2.size()<=2)yes;
+            else {
+                bool b = 0; 
+                for (int i = 1; i<arr2.size()-1; i++){
+                    if (arr2[i-1]<arr2[i] && arr2[i]>arr2[i+1]){
+                        b = 1; 
+                    }
+                }
 
-            ans++;
+                if (b)no;
+                else yes;
+            }
+
+           
         }
     }
-    cout << ans << endl;
 }
 
 int32_t main()

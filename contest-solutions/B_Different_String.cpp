@@ -12,7 +12,7 @@ void dbg_out(Head H, Tail... T)
 #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
 
 #define endl '\n'
-#define int long long
+#define ll long long
 #define pub push_back
 #define pob pop_back
 #define all(X) (X).begin(), (X).end()
@@ -29,34 +29,27 @@ void dbg_out(Head H, Tail... T)
 void exc()
 {
     int t, n;
-    int l, r, x;
-    cin >> n >> l >> r >> x;
-    arrin(int, arr, n);
-
-    sort(arr, arr + n);
-
-    int ans = 0;
-
-    for (int i = 0; i < pow(2, n); i++)
+    cin >> t;
+    while (t--)
     {
-        int sum = 0;
-        vector<int> sbs;
-        for (int j = 0; j < n; j++)
+        string s;
+        cin >> s;
+
+        string r = s;
+        sort(r.begin(), r.end());
+        if (r == s)
         {
-            if (i & (1 << j))
-            {
-                sbs.push_back(arr[j]);
-                sum += arr[j];
-            }
+            reverse(r.begin(), r.end());
         }
 
-        if (sbs.size() >= 2 && sum <= r && l <= sum && sbs[sbs.size() - 1] - sbs[0] >= x)
+        if (r == s)
+            no;
+        else
         {
-
-            ans++;
+            yes;
+            cout << r << endl;
         }
     }
-    cout << ans << endl;
 }
 
 int32_t main()

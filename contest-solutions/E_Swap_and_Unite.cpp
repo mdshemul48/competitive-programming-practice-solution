@@ -12,7 +12,7 @@ void dbg_out(Head H, Tail... T)
 #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
 
 #define endl '\n'
-#define int long long
+#define ll long long
 #define pub push_back
 #define pob pop_back
 #define all(X) (X).begin(), (X).end()
@@ -29,34 +29,36 @@ void dbg_out(Head H, Tail... T)
 void exc()
 {
     int t, n;
-    int l, r, x;
-    cin >> n >> l >> r >> x;
-    arrin(int, arr, n);
-
-    sort(arr, arr + n);
-
-    int ans = 0;
-
-    for (int i = 0; i < pow(2, n); i++)
+    cin >> t;
+    while (t--)
     {
-        int sum = 0;
-        vector<int> sbs;
-        for (int j = 0; j < n; j++)
+        string s;
+        cin >> s;
+        if (s.size() == 1){ cout<<0<<endl; continue;}
+        int arr[26] = {0};
+        int mx = 0; 
+        for (int i = 0; i < s.size(); i++)
         {
-            if (i & (1 << j))
-            {
-                sbs.push_back(arr[j]);
-                sum += arr[j];
-            }
+            arr[s[i] - 'a']++;
         }
 
-        if (sbs.size() >= 2 && sum <= r && l <= sum && sbs[sbs.size() - 1] - sbs[0] >= x)
-        {
+        int check[s.size()];
 
-            ans++;
+        int c = 0; 
+        for (int i = 0; i<s.size(); i++){
+            c++; 
+            check[i] = arr[s[i] - 'a'] - c;
+            if (s[i] != s[i+1]) c = 0; 
         }
+
+        int ans = INT_MAX;
+        for (int i = 0; i<s.size(); i++) {
+            cout<<check[i]<<" ";
+            ans = min(check[i], ans);
+        }
+        cout<<endl;
+        cout<<ans<<endl;
     }
-    cout << ans << endl;
 }
 
 int32_t main()

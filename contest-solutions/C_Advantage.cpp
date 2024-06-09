@@ -12,7 +12,7 @@ void dbg_out(Head H, Tail... T)
 #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
 
 #define endl '\n'
-#define int long long
+#define ll long long
 #define pub push_back
 #define pob pop_back
 #define all(X) (X).begin(), (X).end()
@@ -22,41 +22,46 @@ void dbg_out(Head H, Tail... T)
 #define minus cout << -1 << endl
 #define cout(v) cout << v << endl;
 #define arrin(type, arr, n)     \
-    type arr[n];                \
+    vector<type> arr(n);        \
     for (int i = 0; i < n; i++) \
     cin >> arr[i]
 
 void exc()
 {
     int t, n;
-    int l, r, x;
-    cin >> n >> l >> r >> x;
-    arrin(int, arr, n);
-
-    sort(arr, arr + n);
-
-    int ans = 0;
-
-    for (int i = 0; i < pow(2, n); i++)
+    cin >> t;
+    while (t--)
     {
-        int sum = 0;
-        vector<int> sbs;
-        for (int j = 0; j < n; j++)
+        cin >> n;
+        arrin(int, arr, n);
+        int mx = 0;
+        int mx2 = 0;
+
+        if (arr[0]> arr[1]) mx = 0, mx2 = 1; 
+        else if (arr[1]> arr[0]) mx = 1, mx2 =0;
+
+        for (int i = 2; i < n; i++)
         {
-            if (i & (1 << j))
+            if (arr[i] > arr[mx])
             {
-                sbs.push_back(arr[j]);
-                sum += arr[j];
+                if (arr[mx2] < arr[mx])
+                    mx2 = mx;
+                mx = i;
+            }
+            else if (arr[i] > arr[mx2])
+                mx2 = i;
+
+        }
+
+        for (int i = 0; i<n; i++){
+            if (i != mx){
+                cout<<arr[i]-arr[mx]<<" ";
+            }else {
+                cout<<arr[i]-arr[mx2]<<" ";
             }
         }
-
-        if (sbs.size() >= 2 && sum <= r && l <= sum && sbs[sbs.size() - 1] - sbs[0] >= x)
-        {
-
-            ans++;
-        }
+        cout<<endl;
     }
-    cout << ans << endl;
 }
 
 int32_t main()

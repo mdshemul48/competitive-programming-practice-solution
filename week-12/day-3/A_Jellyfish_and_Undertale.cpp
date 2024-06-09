@@ -29,34 +29,29 @@ void dbg_out(Head H, Tail... T)
 void exc()
 {
     int t, n;
-    int l, r, x;
-    cin >> n >> l >> r >> x;
-    arrin(int, arr, n);
-
-    sort(arr, arr + n);
-
-    int ans = 0;
-
-    for (int i = 0; i < pow(2, n); i++)
+    cin >> t;
+    while (t--)
     {
-        int sum = 0;
-        vector<int> sbs;
-        for (int j = 0; j < n; j++)
+        int b, a, n;
+        cin >> b >> a >> n;
+        arrin(int, arr, n);
+
+        sort(arr, arr + n);
+
+        int sum = a;
+        for (int i = 0; i < n; i++)
         {
-            if (i & (1 << j))
+            if (b <= arr[i]+1)
             {
-                sbs.push_back(arr[j]);
-                sum += arr[j];
+                sum += b-1;
+            }
+            else
+            {
+                sum += arr[i];
             }
         }
-
-        if (sbs.size() >= 2 && sum <= r && l <= sum && sbs[sbs.size() - 1] - sbs[0] >= x)
-        {
-
-            ans++;
-        }
+        cout<<sum<<endl;
     }
-    cout << ans << endl;
 }
 
 int32_t main()
